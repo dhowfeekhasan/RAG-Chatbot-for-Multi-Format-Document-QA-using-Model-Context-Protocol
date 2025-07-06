@@ -21,17 +21,16 @@ An **Agent-Based** chatbot system capable of answering user queries over **multi
 ---
 ## 💻 Run the Application
 Step 1 :  Create Virtual Environment
-- python -m venv venv
-- venv\Scripts\activate
+-      python -m venv venv
+-      venv\Scripts\activate
   
 Step 2 : Install dependencies
-- pip install --upgrade pip
-- pip install -r requirements.txt
+-      pip install --upgrade pip
+-      pip install -r requirements.txt
            
 Step 3 : To run UI    
-- streamlit run ui/app.py      # Streamlit UI 
-                or 
-- python main/coordinator.py   #Command-line Interface
+  -      streamlit run ui/app.py   # Streamlit UI 
+-        python main/coordinator.py   #Command-line Interface
 
 
 ## 🧱 Project Structure 
