@@ -1,0 +1,14 @@
+openai==1.30.1  # Core Agents
+sentence-transformers==2.2.2
+faiss-cpu==1.7.4
+pdfplumber==0.10.2 # Document Parsing
+python-docx==1.1.0
+python-pptx==0.6.21
+pandas==2.2.2
+pytesseract==0.3.10
+Pillow==10.3.0
+PyMuPDF==1.24.2
+opencv-python==4.9.0.80 # Image Processing (for OCR)
+numpy==1.26.4
+streamlit==1.35.0 # Optional UI (Streamlit)
+tqdm==4.66.2 # System / misc
