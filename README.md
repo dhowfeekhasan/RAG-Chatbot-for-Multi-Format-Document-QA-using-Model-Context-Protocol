@@ -19,7 +19,7 @@ An **Agent-Based** chatbot system capable of answering user queries over **multi
 - External LLM support (Together.ai or local LLaMA)
 
 ---
-## Run the Application
+## 💻 Run the Application
 Step 1 :  Create Virtual Environment
 - python -m venv venv
 - venv\Scripts\activate
