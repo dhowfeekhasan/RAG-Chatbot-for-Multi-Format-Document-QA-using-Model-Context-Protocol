@@ -19,6 +19,10 @@ An **Agent-Based** chatbot system capable of answering user queries over **multi
 - LLM support
 
 ---
+## 📌 System Flow Diagram 
+![image](https://github.com/user-attachments/assets/6dea681e-3e44-4ca0-aa5b-30602db26d58)
+
+
 ## 💻 Run the Application
 Step 1 :  Create Virtual Environment
 -      python -m venv venv
