@@ -16,7 +16,7 @@ An **Agent-Based** chatbot system capable of answering user queries over **multi
 - Streamlit-based chatbot UI
 - Continuous query loop with trace logging
 - Automatic logging of interactions (`logs/interaction_log.csv`)
-- External LLM support (Together.ai or local LLaMA)
+- LLM support
 
 ---
 ## 💻 Run the Application
