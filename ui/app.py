@@ -17,7 +17,7 @@ os.makedirs(EXTRACT_DIR, exist_ok=True)
 
 # Title
 st.set_page_config(page_title="Agentic RAG Chatbot", layout="wide")
-st.title("🤖 Agentic RAG Chatbot - Multi-Format Document QA")
+st.title("🤖 RAG Chatbot - Multi-Format Document QA")
 
 # Initialize Coordinator
 coordinator = Coordinator()
