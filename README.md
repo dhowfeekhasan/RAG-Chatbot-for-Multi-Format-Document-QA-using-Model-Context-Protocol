@@ -3,7 +3,8 @@ By Dhowfeek Hasan
 
 An **Agent-Based** chatbot system capable of answering user queries over **multi-format documents** (PDF, DOCX, PPTX, TXT, CSV, XLSX, Images) using **Retrieval-Augmented Generation (RAG)** and **Model Context Protocol (MCP)**.
 
-![image](https://github.com/user-attachments/assets/3d7bc3ea-817c-487a-bc87-4b63acb8a025)
+<img width="1914" height="843" alt="image" src="https://github.com/user-attachments/assets/ead6968d-9c77-4b3e-8e4e-5cc54b301faa" />
+
 
 
 ---
