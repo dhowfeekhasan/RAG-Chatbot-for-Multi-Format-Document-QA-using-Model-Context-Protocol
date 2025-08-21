@@ -1,9 +1,9 @@
 import os
 import uuid
-from agents.agent_1 import IngestionAgent
-from agents.agent_2 import RetrievalAgent
-from agents.agent_3 import LLMResponseAgent
-from agents.agent_4 import LoggingAgent  # ✅ NEW AGENT
+from agents.Ingestion import IngestionAgent
+from agents.Retreival import RetrievalAgent
+from agents.llm import LLMResponseAgent
+from agents.logging import LoggingAgent 
 from mcp.message_protocol import MCPMessage
 
 class Coordinator:
@@ -11,7 +11,7 @@ class Coordinator:
         self.ingestion_agent = IngestionAgent()
         self.retrieval_agent = RetrievalAgent()
         self.llm_response_agent = LLMResponseAgent()
-        self.logging_agent = LoggingAgent()  # ✅ INIT LOGGER
+        self.logging_agent = LoggingAgent()
 
     def handle_user_query(self, file_path, document_type, user_question, trace_id):
         ingestion_msg = MCPMessage(
@@ -44,7 +44,7 @@ class Coordinator:
 
         llm_response = self.llm_response_agent.handle_context(retrieval_response)
 
-        # ✅ LOG THE INTERACTION
+        # Log the interaction
         log_msg = MCPMessage(
             sender="Coordinator",
             receiver="LoggingAgent",
