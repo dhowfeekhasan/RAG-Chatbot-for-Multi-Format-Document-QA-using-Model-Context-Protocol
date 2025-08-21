@@ -21,7 +21,8 @@ An **Agent-Based** chatbot system capable of answering user queries over **multi
 
 ---
 ## 📌 System Flow Diagram 
-![image](https://github.com/user-attachments/assets/6dea681e-3e44-4ca0-aa5b-30602db26d58)
+<img width="1513" height="554" alt="image" src="https://github.com/user-attachments/assets/fcbecf0d-6a9a-400e-912f-d2bde2a66a08" />
+
 
 
 ## 💻 Run the Application
