@@ -1,4 +1,4 @@
-# 🤖 Agentic RAG Chatbot for Multi-Format Document QA using Model Context Protocol (MCP) 
+# 🤖 RAG Chatbot for Multi-Format Document QA using Model Context Protocol (MCP) 
 By Dhowfeek Hasan 
 
 An **Agent-Based** chatbot system capable of answering user queries over **multi-format documents** (PDF, DOCX, PPTX, TXT, CSV, XLSX, Images) using **Retrieval-Augmented Generation (RAG)** and **Model Context Protocol (MCP)**.
