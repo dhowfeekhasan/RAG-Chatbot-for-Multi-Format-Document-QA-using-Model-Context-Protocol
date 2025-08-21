@@ -41,7 +41,7 @@ Step 3 : To run UI
 
 ## 🧱 Project Structure 
 
-     ├── agents/ # Agent1: Ingestion, Agent2: Retrieval, Agent3: LLM Response
+     ├── agents/ # Ingestion, Retrieval, LLM Response, logging
      ├── core/ # Text extraction & embedding utils
      ├── main/ # Coordinator orchestrating agents
      ├── mcp/ # Message protocol definition
