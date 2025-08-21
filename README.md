@@ -50,11 +50,9 @@ Step 3 : To run UI
      ├── logs/ # Auto-generated interaction logs
      └── requirements.txt
 
-👨‍💻 Developer
-Developed by Dhowfeek Hasan
 
 📝 License
-This project is for educational and demonstration purposes. Reach out if you plan to use commercially.
+This project is for educational and demonstration purposes.
 
 
 
