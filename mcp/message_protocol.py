@@ -2,8 +2,8 @@
 
 class MCPMessage:
     """
-    Message Control Protocol - Simple communication system between agents
-    Think of this like an email system where agents send structured messages to each other
+    Message Control Protocol - Simple communication system between process
+    Think of this like an email system where it send structured messages for each process
     Each message has clear sender, receiver, type, and content (payload)
     """
     
