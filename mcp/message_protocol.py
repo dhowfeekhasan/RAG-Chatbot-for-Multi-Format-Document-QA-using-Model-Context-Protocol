@@ -9,10 +9,10 @@ class MCPMessage:
     
     def __init__(self, sender, receiver, msg_type, trace_id, payload):
         """
-        Create a new message between agents
+        Create a new message between process
         Args:
-            sender: Which agent is sending this message
-            receiver: Which agent should receive this message
+            sender: Which process is sending this message
+            receiver: Which process should receive this message
             msg_type: What type of request/response this is (e.g., "DOCUMENT_UPLOAD")
             trace_id: Unique ID to track this request through the entire system
             payload: The actual data being sent (dictionary with relevant info)
