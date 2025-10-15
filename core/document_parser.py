@@ -1,6 +1,4 @@
 # core/document_parser.py
-
-# Import libraries for different document types and image processing
 import os
 import pdfplumber          # For PDF text extraction
 import docx               # For Word documents
@@ -13,14 +11,6 @@ import fitz               # PyMuPDF - for PDF image extraction
 import shutil             # For file/folder operations
 
 def process_file(file_path, document_type):
-    """
-    Main function to extract text and images from various document types
-    Args:
-        file_path: Path to the document file
-        document_type: Type of document (used for processing decisions)
-    Returns:
-        tuple: (text_file_path, list_of_image_paths)
-    """
     # Get file extension to determine processing method
     ext = os.path.splitext(file_path)[-1].lower()
     output_folder = "extracted_data"
@@ -52,15 +42,6 @@ def process_file(file_path, document_type):
     return txt_file_path, extracted_images
 
 def extract_text_and_images_from_pdf(pdf_path, txt_file_path, output_folder):
-    """
-    Extract both text and images from PDF files
-    Args:
-        pdf_path: Path to PDF file
-        txt_file_path: Where to save extracted text
-        output_folder: Where to save extracted images
-    Returns:
-        List of extracted image file paths
-    """
     all_text = []           # Store text from all pages
     extracted_images = []   # Store image file paths
     
@@ -99,15 +80,6 @@ def extract_text_and_images_from_pdf(pdf_path, txt_file_path, output_folder):
     return extracted_images
 
 def extract_text_and_images_from_docx(docx_path, txt_file_path, output_folder):
-    """
-    Extract text from Word documents
-    Args:
-        docx_path: Path to DOCX file
-        txt_file_path: Where to save extracted text
-        output_folder: Where to save any images (not implemented yet)
-    Returns:
-        List of extracted images (empty for now)
-    """
     # Load Word document
     doc = docx.Document(docx_path)
     
@@ -122,14 +94,6 @@ def extract_text_and_images_from_docx(docx_path, txt_file_path, output_folder):
     return []
 
 def extract_text_from_csv(csv_path, txt_file_path):
-    """
-    Convert CSV data to text format
-    Args:
-        csv_path: Path to CSV file
-        txt_file_path: Where to save converted text
-    Returns:
-        Empty list (no images in CSV files)
-    """
     try:
         # Try UTF-8 encoding first (most common)
         df = pd.read_csv(csv_path)
@@ -145,15 +109,6 @@ def extract_text_from_csv(csv_path, txt_file_path):
     return []  # No images in CSV files
 
 def extract_text_and_images_from_pptx(pptx_path, txt_file_path, output_folder):
-    """
-    Extract text from PowerPoint presentations
-    Args:
-        pptx_path: Path to PPTX file
-        txt_file_path: Where to save extracted text
-        output_folder: Where to save any images (not implemented yet)
-    Returns:
-        List of extracted images (empty for now)
-    """
     presentation = Presentation(pptx_path)
     full_text = []
     
@@ -173,14 +128,6 @@ def extract_text_and_images_from_pptx(pptx_path, txt_file_path, output_folder):
     return []
 
 def extract_text_from_image(image_path, txt_file_path):
-    """
-    Extract text from images using OCR (Optical Character Recognition)
-    Args:
-        image_path: Path to image file
-        txt_file_path: Where to save extracted text
-    Returns:
-        List containing the original image path
-    """
     # Load image and convert to grayscale (better for OCR)
     img = Image.open(image_path).convert("L")
     
