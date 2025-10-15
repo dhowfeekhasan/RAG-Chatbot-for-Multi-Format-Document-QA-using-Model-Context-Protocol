@@ -1,5 +1,5 @@
 # agents/ingestion.py
-# Import required modules for message passing and document processing
+
 from mcp.message_protocol import MCPMessage
 from core.document_parser import process_file
 import os
