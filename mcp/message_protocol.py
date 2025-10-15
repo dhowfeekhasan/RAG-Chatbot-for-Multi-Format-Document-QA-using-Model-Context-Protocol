@@ -1,18 +1,17 @@
 # mcp/message_protocol.py
-
 class MCPMessage:
     """
-    Message Control Protocol - Simple communication system between process
-    Think of this like an email system where it send structured messages for each process
+    Message Control Protocol - Simple communication system between agents
+    Think of this like an email system where agents send structured messages to each other
     Each message has clear sender, receiver, type, and content (payload)
     """
     
     def __init__(self, sender, receiver, msg_type, trace_id, payload):
         """
-        Create a new message between process
+        Create a new message between agents
         Args:
-            sender: Which process is sending this message
-            receiver: Which process should receive this message
+            sender: Which agent is sending this message
+            receiver: Which agent should receive this message
             msg_type: What type of request/response this is (e.g., "DOCUMENT_UPLOAD")
             trace_id: Unique ID to track this request through the entire system
             payload: The actual data being sent (dictionary with relevant info)
