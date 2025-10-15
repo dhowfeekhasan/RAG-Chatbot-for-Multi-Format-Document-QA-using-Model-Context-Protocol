@@ -8,7 +8,7 @@ class LLMResponseAgent:
     def __init__(self, name="LLMResponseAgent"):
         self.name = name  # Agent identifier
         # Set up Together.AI API key (should use environment variable in production)
-        together.api_key = "0e711d5e4457d350c4707d48cbffbd0be7fb0be77e71cf4a85e83c225f0f9e6b"
+        together.api_key = "00cdccaa2ec759d498e67055abd0f051bffdb132ebb516f241dd37156b3aa0da"
         # Use free Llama model for responses
         self.model = "meta-llama/Llama-3.3-70B-Instruct-Turbo-Free"
 
