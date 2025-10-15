@@ -1,4 +1,4 @@
-# agents/retrieval.py (Fixed filename from Retreival.py)
+#agents/retreival.py
 # Import required modules for message passing and AI models
 from mcp.message_protocol import MCPMessage
 from sentence_transformers import SentenceTransformer
@@ -14,53 +14,45 @@ class RetrievalAgent:
         self.chunks = []   # Store text chunks
 
     def group_lines(self, lines, group_size=3):
-        """
-        Group lines of text into chunks for better context
-        Args:
-            lines: List of text lines
-            group_size: Number of lines to group together
-        Returns:
-            List of text chunks
-        """
         return [" ".join(lines[i:i+group_size]) for i in range(0, len(lines), group_size)]
 
     def embed_chunks(self, chunks):
-        """
-        Convert text chunks into numerical embeddings
-        Args:
-            chunks: List of text chunks
-        Returns:
-            Numpy array of embeddings
-        """
         return self.model.encode(chunks).astype("float32")
 
     def build_index(self, text_path):
-        """
-        Build searchable index from extracted text file
-        Args:
-            text_path: Path to extracted text file
-        """
         # Read and clean text lines
         with open(text_path, "r", encoding="utf-8") as f:
             lines = [line.strip() for line in f if line.strip()]
 
+        # Check if we have any text to process
+        if not lines:
+            print("⚠️ Warning: No text content found in document")
+            self.chunks = []
+            self.index = None
+            return
+
         # Group lines into chunks and create embeddings
         self.chunks = self.group_lines(lines)
+        
+        # Check if we have chunks after grouping
+        if not self.chunks:
+            print("⚠️ Warning: No chunks created from text")
+            self.index = None
+            return
+        
         embeddings = self.embed_chunks(self.chunks)
+        
+        # Verify embeddings were created successfully
+        if embeddings.shape[0] == 0:
+            print("⚠️ Warning: Failed to create embeddings")
+            self.index = None
+            return
 
         # Create FAISS index for fast similarity search
         self.index = faiss.IndexFlatL2(embeddings.shape[1])
         self.index.add(embeddings)
 
-    def retrieve(self, query, k=3):
-        """
-        Find most relevant chunks for a query
-        Args:
-            query: User's question
-            k: Number of chunks to retrieve
-        Returns:
-            List of relevant text chunks
-        """
+    def retrieve(self, query, k=10):
         # Convert query to embedding
         query_embedding = self.model.encode([query]).astype("float32")
         # Search for similar chunks
@@ -69,13 +61,6 @@ class RetrievalAgent:
         return [self.chunks[i] for i in I[0] if i < len(self.chunks)]
 
     def handle_document(self, mcp_message):
-        """
-        Main handler for document processing and retrieval
-        Args:
-            mcp_message: Message containing text path and query
-        Returns:
-            Message with retrieved context for LLM
-        """
         # Extract information from message
         text_path = mcp_message.payload["text_path"]
         query = mcp_message.payload["query"]
