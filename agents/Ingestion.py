@@ -9,13 +9,6 @@ class IngestionAgent:
         self.name = name  # Agent identifier
 
     def handle_document(self, file_path, doc_type, trace_id):
-        """
-        Process uploaded document and extract text/images
-        Args:
-            file_path: Path to the uploaded document
-            doc_type: Type of document (pdf, docx, etc.)
-            trace_id: Unique identifier for tracking this request
-        """
         # Extract text and images from the document
         text_path, image_paths = process_file(file_path, doc_type)
 
