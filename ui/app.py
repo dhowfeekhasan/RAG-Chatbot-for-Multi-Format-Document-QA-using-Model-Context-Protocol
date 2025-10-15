@@ -1,4 +1,4 @@
-# Import Streamlit for web interface and other required modules
+#ui/app.py
 import streamlit as st
 import os
 import uuid
@@ -51,13 +51,21 @@ with st.sidebar:
     
     # Questions Asked Counter
     st.markdown("**Questions Asked**")
-    st.markdown(f"### {st.session_state.questions_asked}")  
+    st.markdown(f"### {st.session_state.questions_asked}")
+    
+    # Additional statistics
+    st.markdown("**Chat Sessions**")
+    st.markdown(f"### {len(st.session_state.chat_history)}")
+    
+    st.markdown("---")  # Separator line
+    
     # Clear Chat History Button
     if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.chat_history = []
         st.session_state.questions_asked = 0
         st.success("Chat history cleared!")
         st.rerun()  # Refresh the page to update display
+    
     # Show memory usage info
     st.markdown("---")
     st.markdown("#### 💾 Memory Info")
@@ -68,7 +76,7 @@ with st.sidebar:
         st.info("No data in memory")
 
 # Main content area
-st.title("🤖RAG Chatbot - Multi-Format Document QA")
+st.title("🤖 Agentic RAG Chatbot - Multi-Format Document QA")
 
 # File uploader widget - allows users to upload various document types
 uploaded_file = st.file_uploader(
@@ -107,17 +115,18 @@ if uploaded_file:
     if question:
         # Show loading spinner while processing
         with st.spinner("🔍 Thinking..."):
-            # Send question through the entire RAG pipeline
-            result = coordinator.handle_user_query(file_path, ext, question, trace_id)
+            # Send question through the entire RAG pipeline with performance tracking
+            result, metrics = coordinator.handle_user_query(file_path, ext, question, trace_id)
             
             # Update statistics
             st.session_state.questions_asked += 1
 
-            # Add Q&A to session history for display
+            # Add Q&A to session history for display (including performance metrics)
             st.session_state.chat_history.append({
                 "question": question,
                 "answer": result.payload["answer"],
-                "sources": result.payload["sources"]  # Context chunks used
+                "sources": result.payload["sources"],  # Context chunks used
+                "metrics": metrics  # Performance data
             })
 
 # Display chat history in a conversational format
@@ -133,11 +142,26 @@ if st.session_state.chat_history:
         with st.chat_message("assistant"):
             st.markdown(f"**Answer:** {msg['answer']}")
             
-            # Show expandable section with source context
-            with st.expander("📚 Context Used"):
-                # Display each context chunk that was used to generate the answer
-                for i, chunk in enumerate(msg["sources"], 1):
-                    st.markdown(f"**Chunk {i}:** {chunk}")
+            # Create two columns for context and performance
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                # Show expandable section with source context
+                with st.expander("📚 Context Used"):
+                    # Display each context chunk that was used to generate the answer
+                    for i, chunk in enumerate(msg["sources"], 1):
+                        st.markdown(f"**Chunk {i}:** {chunk}")
+            
+            with col2:
+                # Show performance metrics if available
+                if "metrics" in msg:
+                    with st.expander("⏱️ Performance"):
+                        metrics = msg["metrics"]
+                        st.metric("Total Time", f"{metrics['total_time']:.2f}s")
+                        st.metric("Ingestion", f"{metrics['ingestion_time']:.2f}s")
+                        st.metric("Retrieval", f"{metrics['retrieval_time']:.2f}s")
+                        st.metric("LLM", f"{metrics['llm_time']:.2f}s")
+                        st.metric("Logging", f"{metrics['logging_time']:.2f}s")
 else:
     # Show welcome message when no chat history
     st.info("👋 Upload a document and start asking questions to see the conversation here!")
@@ -146,14 +170,16 @@ else:
 st.markdown(
     """
     <style>
-    .top-right-box {
-        position: fixed;        /* Stay in same position when scrolling */
+    .top-left-box {
+        position: fixed;       
         top: 10px;             /* 10px from top */
-        right: 15px;            /* 15px from left */
+        right: 15px;           /* 15px from right (moved to avoid sidebar) */
         z-index: 100;          /* Appear above other elements */
         padding: 6px 12px;     /* Internal spacing */
-        border-radius: 6px;    /* Rounded corners */
-        font-size: 13px;       /* Small text size */
+        border-radius: 6px;   /* Rounded corners */
+        font-size: 13px;      
+        background-color: rgba(255, 255, 255, 0.9);  /* Semi-transparent background */
+        border: 1px solid #ddd;  /* Light border */
     }
     </style>
     <div class="top-left-box">
