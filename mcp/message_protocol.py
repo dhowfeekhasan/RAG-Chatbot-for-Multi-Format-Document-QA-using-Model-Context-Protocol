@@ -1,10 +1,5 @@
 # mcp/message_protocol.py
 class MCPMessage:
-    """
-    Message Control Protocol - Simple communication system between agents
-    Think of this like an email system where agents send structured messages to each other
-    Each message has clear sender, receiver, type, and content (payload)
-    """
     
     def __init__(self, sender, receiver, msg_type, trace_id, payload):
         """
