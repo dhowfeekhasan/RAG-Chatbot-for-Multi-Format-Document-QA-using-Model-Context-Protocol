@@ -17,13 +17,6 @@ class LoggingAgent:
         self.log_file = os.path.join(self.log_dir, "interaction_logs.csv")
 
     def handle_log(self, mcp_message):
-        """
-        Log user interactions to CSV file for analysis and debugging
-        Args:
-            mcp_message: Message containing interaction data to log
-        Returns:
-            Confirmation message that logging is complete
-        """
         # Extract data from the message payload
         payload = mcp_message.payload
         trace_id = mcp_message.trace_id
